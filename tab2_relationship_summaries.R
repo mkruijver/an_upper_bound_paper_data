@@ -1,4 +1,9 @@
-## For all relationships, list out kappa_1 and the moments of total IBD
+## For all relationships, list out:
+# kappa_1
+# moments of total IBD
+# moments of segment count
+# pr(total ibd = 0)
+# moments of # chromosomes with total ibd = 0
 
 source("relationships.R")
 
@@ -12,6 +17,7 @@ df_sharing$kappa1 <- sapply(names(peds), function(relationship_name){
                                            ids = persons[[relationship_name]],
                                            states = "kappa")))
 })
+
 
 moments_by_rel <- sapply(names(peds), function(relationship_name){
   ibdsegments::total_ibd_dist_moments(pedigree = peds[[relationship_name]],
@@ -67,7 +73,8 @@ df_sharing$n0_expected <- sapply(n0_pmfs_by_relationship_name, pmf_exp)
 df_sharing$n0_sd <- sqrt(sapply(n0_pmfs_by_relationship_name, pmf_exp2) -
                            sapply(n0_pmfs_by_relationship_name, pmf_exp)^2)
 
-o <- df_sharing$Relationship[order(df_sharing$total_shared_mean, df_sharing$total_shared_sd, decreasing = TRUE)]
+o <- df_sharing$Relationship[order(df_sharing$total_shared_mean,
+                                   df_sharing$total_shared_sd, decreasing = TRUE)]
 
 df_sharing_sorted <- df_sharing[match(o, df_sharing$Relationship),]
 
