@@ -52,21 +52,21 @@ sims_merged <- do.call(rbind, sims)
 #
 # sims_merged <- readr::read_csv("sims_1_1e5.csv")
 
-plot_df <- tidyr::pivot_longer(sims_merged, cols = c(total_length, segments),
+plot_df <- tidyr::pivot_longer(sims_merged, cols = c(total_length, segment_count),
                                names_to = "variable",
                                values_to = "value")
 
 plot_df$relationship_ordered <- factor(plot_df$relationship,
                                        levels = relationship_names_with_gaps)
 
-plot_df$variable <- factor(plot_df$variable, levels = c("total_length", "segments"))
+plot_df$variable <- factor(plot_df$variable, levels = c("total_length", "segment_count"))
 
 require(ggplot2)
 
 
 plot_df_gaps <- rbind(plot_df[-1],
       data.frame(relationship_ordered = rep(grep("gap", relationship_names_with_gaps, value = TRUE), each=2),
-           variable = c("total_length", "segments"),
+           variable = c("total_length", "segment_count"),
            value = NA))
 
 
@@ -107,7 +107,7 @@ ggplot() +
   xlab("") +
   ylab("Relationship") + facet_wrap(~ variable, scales= "free",
                                     labeller = labeller(variable = c("total_length" = "Total IBD (cM)",
-                                                                     "segments" = "Segment count"))) +
+                                                                     "segment_count" = "Segment count"))) +
   coord_trans(x = sqrt2) +
   scale_x_continuous(n.breaks =  7)
 
