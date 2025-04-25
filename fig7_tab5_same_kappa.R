@@ -13,7 +13,7 @@ inv_kappas <- names(relationship_names_by_inv_kappa)
 
 for (inv_kappa in inv_kappas){
 
-  number_of_simulations <- 1e4 # 1e6 in the paper, runs overnight
+  number_of_simulations <- 1e6 # 1e6 in the paper, runs overnight
 
   cat("Starting", number_of_simulations, "simulations with kappa_inv", inv_kappa, "\n")
 
@@ -81,9 +81,9 @@ compute_lrs_from_likelihoods <- function(sims, relationship_names){
   }))
 }
 
-sims_by_inv_kappa <- list("2" = readr::read_csv("kappa_1_2_rels_1e4.csv"),
-                          "4" = readr::read_csv("kappa_1_4_rels_1e4.csv"),
-                          "8" = readr::read_csv("kappa_1_8_rels_1e4.csv"))
+sims_by_inv_kappa <- list("2" = readr::read_csv("kappa_1_2_rels_1e6.csv"),
+                          "4" = readr::read_csv("kappa_1_4_rels_1e6.csv"),
+                          "8" = readr::read_csv("kappa_1_8_rels_1e6.csv"))
 
 relationship_names_by_inv_kappa <-
   list("2" = c("GP", "HS", "N"),
