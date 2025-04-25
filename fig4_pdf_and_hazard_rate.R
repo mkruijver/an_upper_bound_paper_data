@@ -5,7 +5,7 @@ relationship_names <- c("HS", "N", "GP")
 x_plot <- seq(from = 0, to = 300, length = 500)
 
 require(ibdsegments)
-cdfs <- pdGNcdfs <- pdfs <- list()
+cdfs <- pdfs <- list()
 
 pdfs <- sapply(relationship_names, function(relationship_name){
   kappa1 <- d_ibd(ibd = 1, pedigree = peds[[relationship_name]],
